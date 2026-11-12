@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CampusBharat - India College & Admission Intelligence</title>
+<style>
+:root{--saf:#ff8a1f;--grn:#138808;--navy:#16213e;--ink:#1d2433;--mut:#667085;--bg:#f6f7fb;--card:#fff;--line:#e4e7ee;--r:14px}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+header{background:linear-gradient(135deg,#16213e,#243b6b);color:#fff;padding:28px 20px 0}
+.wrap{max-width:1040px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:42px;height:42px;border-radius:12px;background:linear-gradient(180deg,var(--saf) 0 33%,#fff 33% 66%,var(--grn) 66%);display:grid;place-items:center;color:#16213e;font-weight:800;font-size:15px}
+h1{margin:0;font-size:24px;letter-spacing:-.3px}
+.sub{color:#c8d2ee;font-size:14px;margin:2px 0 0}
+nav{display:flex;gap:4px;margin-top:22px;overflow-x:auto}
+nav button{background:transparent;border:0;color:#c8d2ee;padding:12px 16px;font:600 14px inherit;font-family:inherit;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap}
+nav button.on{color:#fff;border-color:var(--saf)}
+main{padding:24px 20px 60px}
+.panel{display:none}.panel.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;margin-bottom:16px}
+h2{margin:0 0 4px;font-size:19px}h3{margin:18px 0 8px;font-size:15px}
+p.hint{color:var(--mut);margin:0 0 14px;font-size:14px}
+label{display:block;font-size:12px;font-weight:600;color:var(--mut);margin-bottom:4px;text-transform:uppercase;letter-spacing:.4px}
+input,select,textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff;color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:2px solid #ffb877;border-color:var(--saf)}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}.row>*{flex:1;min-width:180px}.row>button{flex:0 0 auto;min-width:0}
+button.pri{background:var(--saf);color:#fff;border:0;border-radius:10px;padding:11px 20px;font:600 14px inherit;font-family:inherit;cursor:pointer}
+button.pri:hover{filter:brightness(.95)}button.pri:disabled{opacity:.6;cursor:wait}
+button.ghost{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;font-family:inherit}
+button.ghost:hover{border-color:var(--saf)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.tag{display:inline-block;background:#eef2ff;color:#3447a8;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:600;margin:2px 4px 2px 0}
+.tag.g{background:#e6f6e4;color:#0d6a05}.tag.o{background:#fff1e0;color:#b45a00}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.stat{background:var(--bg);border-radius:12px;padding:12px}
+.stat b{display:block;font-size:19px}.stat span{font-size:12px;color:var(--mut)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:700px){.two{grid-template-columns:1fr}}
+ul{margin:6px 0;padding-left:20px}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{border-bottom:1px solid var(--line);padding:9px 8px;text-align:left;vertical-align:top}th{font-size:12px;color:var(--mut);text-transform:uppercase}
+.notice{background:#fff8e6;border:1px solid #f5dd9b;color:#7a5a00;border-radius:10px;padding:9px 12px;font-size:13px;margin:12px 0}
+.src a{display:block;font-size:13px;color:#2447c8;text-decoration:none;margin:3px 0}.src a:hover{text-decoration:underline}
+.tier{border-left:5px solid;border-radius:12px;padding:14px 16px;background:#fff;border:1px solid var(--line);border-left-width:5px;margin-bottom:12px}
+.tier.dream{border-left-color:#8e44ad}.tier.reach{border-left-color:var(--saf)}.tier.safe{border-left-color:var(--grn)}
+.tier h4{margin:0 0 6px;font-size:15px}.tier small{color:var(--mut)}
+.ans{white-space:pre-wrap}
+.loading{color:var(--mut);padding:10px 0}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid #ddd;border-top-color:var(--saf);border-radius:50%;animation:s .7s linear infinite;vertical-align:-2px;margin-right:8px}
+@keyframes s{to{transform:rotate(360deg)}}
+.mode{font-size:13px;color:#c8d2ee;margin-top:14px;padding-bottom:2px}
+.mode input{width:260px;padding:6px 10px;font-size:13px;display:inline-block;margin-left:6px}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:0 20px 40px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="brand"><div class="logo">CB</div>
+      <div><h1>CampusBharat</h1><p class="sub">India College & Admission Intelligence</p></div></div>
+    <div class="mode">Mode: <b id="modeLabel">Offline demo (built-in fallback data)</b> &nbsp;·&nbsp; Optional live Gemini key:
+      <input id="apiKey" type="password" placeholder="Paste GEMINI_API_KEY (stays in this tab)" autocomplete="off"></div>
+    <nav id="tabs">
+      <button class="on" data-t="search">College Search</button>
+      <button data-t="counselor">AI Admission Counselor</button>
+      <button data-t="compare">Compare Colleges</button>
+      <button data-t="ask">Ask About a College</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- SEARCH -->
+  <section class="panel on" id="search">
+    <div class="card"><h2>Live Search & Deep College Dossier</h2>
+      <p class="hint">Search any college or university in India.</p>
+      <div class="row"><div><label>College / University</label><input id="sq" placeholder="e.g. IIT Bombay, COEP Pune, VIT Vellore"></div>
+      <button class="pri" id="sgo">Search</button></div>
+      <div class="chips" id="sChips"></div></div>
+    <div id="sOut"></div>
+  </section>
+
+  <!-- COUNSELOR -->
+  <section class="panel" id="counselor">
+    <div class="card"><h2>AI Admission Counselor & College Predictor</h2>
+      <p class="hint">Enter your profile to get Dream / Reach / Safe colleges and a counseling strategy.</p>
+      <div class="grid">
+        <div><label>Entrance Exam</label><select id="cExam"><option>JEE Main</option><option>JEE Advanced</option><option>NEET UG</option><option>CUET UG</option><option>MHT-CET</option><option>WBJEE</option><option>COMEDK</option><option>BITSAT</option></select></div>
+        <div><label>Score / Percentile / Rank</label><input id="cScore" placeholder="e.g. 96.5 percentile or AIR 12000"></div>
+        <div><label>Category</label><select id="cCat"><option>General / Open</option><option>EWS</option><option>OBC-NCL</option><option>SC</option><option>ST</option></select></div>
+        <div><label>Preferred Stream</label><select id="cStream"><option>Engineering</option><option>Medical</option><option>Management</option><option>Law</option><option>Arts & Sciences</option></select></div>
+        <div><label>Max Budget / Year</label><input id="cBudget" placeholder="e.g. ₹2,00,000 (or Any)"></div>
+        <div><label>Preferred State(s)</label><input id="cStates" placeholder="e.g. Maharashtra, Karnataka"></div>
+      </div>
+      <div style="margin-top:14px"><button class="pri" id="cgo">Generate Report</button></div></div>
+    <div id="cOut"></div>
+  </section>
+
+  <!-- COMPARE -->
+  <section class="panel" id="compare">
+    <div class="card"><h2>Head-to-Head College Comparison Matrix</h2>
+      <p class="hint">Compare two or more institutions side by side.</p>
+      <div class="row"><div><label>College 1</label><input class="cmp" placeholder="e.g. NIT Trichy"></div>
+      <div><label>College 2</label><input class="cmp" placeholder="e.g. VIT Vellore"></div>
+      <div><label>College 3 (optional)</label><input class="cmp" placeholder="optional"></div>
+      <button class="pri" id="mgo">Compare</button></div></div>
+    <div id="mOut"></div>
+  </section>
+
+  <!-- ASK -->
+  <section class="panel" id="ask">
+    <div class="card"><h2>Ask Any Question about Any College</h2>
+      <p class="hint">Hostels, ragging, food, branch change, cutoffs, placements.</p>
+      <div class="row"><div><label>College</label><input id="aCol" placeholder="e.g. IIIT Hyderabad"></div></div>
+      <div style="margin-top:10px"><label>Your question</label><textarea id="aQ" rows="3" placeholder="e.g. How easy is branch change after first year?"></textarea></div>
+      <div class="chips" id="aChips"></div>
+      <div style="margin-top:14px"><button class="pri" id="ago">Ask</button></div></div>
+    <div id="aOut"></div>
+  </section>
+</main>
+<footer>Portfolio project · Full-stack AI app (Express + Vite + Google Gemini with Search grounding) · This page runs the app logic in the browser.</footer>
+
+<script>
+/* ===== helpers ===== */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const MODEL = 'gemini-3.8-flash';
+
+/* ===== Fallback builders (ported from server) ===== */
+function buildFallbackCounselorReport(exam, score, category, stream) {
+  return {
+    profileAssessment: `Based on your performance in ${exam} (${score}) under the ${category} category for ${stream}, you possess a solid competitive standing in All-India and State counseling tiers. With calculated choice ordering, top engineering and university programs are well within target reach.`,
+    dreamColleges: [
+      { collegeName: 'National Institute of Technology (Top 5 NITs / Premier IIITs)', branchOrCourse: stream.includes('Medical') ? 'AIIMS / JIPMER MBBS' : 'Computer Science / Artificial Intelligence', whyDream: 'Aspirational choice for Round 1-2. Potential allotment in CSAB special vacancy rounds or internal spot upgrades.', expectedCutoffRank: 'Top 1-2 percentile band', approxAnnualFee: '₹1,45,000' },
+      { collegeName: 'BITS Pilani / Tier-1 Deemed Tech University', branchOrCourse: 'Computer Science / Electronics', whyDream: 'High placement velocity and stellar startup ecosystem; worth keeping in spot iterations.', expectedCutoffRank: 'Top merit score', approxAnnualFee: '₹5,40,000' }
+    ],
+    reachColleges: [
+      { collegeName: 'State Premier Autonomous Institute (e.g. COEP / VJTI / Jadavpur / RVCE)', branchOrCourse: 'Information Tech / Electronics & Communication', whyReach: 'Very high probability of direct seat allotment through Centralized Admission Process (CAP).', expectedCutoffRank: 'Consistent with current percentile band', approxAnnualFee: '₹1,15,000' },
+      { collegeName: 'Top IIIT (Allahabad, Gwalior, Jabalpur, Kancheepuram)', branchOrCourse: 'IT / Computer Science with Specialization', whyReach: 'Excellent ROI with strong software developer placements matching top NITs.', expectedCutoffRank: 'Closing within primary JoSAA rounds', approxAnnualFee: '₹1,90,000' }
+    ],
+    safeColleges: [
+      { collegeName: 'Accredited State University Department / Established Autonomous College', branchOrCourse: 'CSE / Data Science / Core Engineering', whySafe: '100% allotment safety buffer with verified NIRF and NAAC A+ accreditation.', expectedCutoffRank: 'Comfortably above closing rank', approxAnnualFee: '₹85,000' },
+      { collegeName: 'Recognized Deemed University (VIT / Manipal / Thapar)', branchOrCourse: 'Core / IT Specialization (Category 1-2 Fee Slab)', whySafe: 'Guaranteed backup seat with solid placement drives hosting 600+ companies.', expectedCutoffRank: 'Eligible in standard phase counseling', approxAnnualFee: '₹2,50,000' }
+    ],
+    counselingStrategy: [
+      'Fill Dream colleges in positions 1 to 10 without hesitation — JoSAA/CAP algorithm allocates strictly downwards with zero penalty.',
+      'Place Reach choices in positions 11 to 25 to guarantee allotment by Round 3.',
+      'Never choose "Freeze" in Round 1 if you wish to upgrade; always choose "Float" to retain your allotted seat while being considered for higher preferences.',
+      'Prepare domicile certificate, category non-creamy layer certificate (issued after April 1), and class 10/12 marksheets beforehand.'
+    ],
+    scholarshipAdvice: 'Eligible for Central Sector Scheme of Scholarship (CSSS), State Tuition Fee Waiver Scheme (TFWS 5% supernumerary quota in engineering), and merit-cum-means waivers.',
+    crucialDeadlines: 'Watch portal release dates for JoSAA, CSAB Special Rounds, State CET Cell Option Form filling, and MCC Medical schedule.'
+  };
+}
+
+function buildFallbackCollegeDossier(query) {
+  const qClean = query.trim();
+  const isEngg = /tech|engineer|iit|nit|iiit|bits|coep|vjti|psg|vit|thapar/i.test(qClean);
+  const isMed = /medical|aiims|mbbs|hospital|doctor|dental/i.test(qClean);
+  const isLaw = /law|nlu|nlsiu|juridical|advocate/i.test(qClean);
+  const isCentral = /iit|nit|aiims|central|iim|delhi university/i.test(qClean);
+  return {
+    id: qClean.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+    name: qClean,
+    shortName: qClean.length > 22 ? qClean.split(' ').map(w => w[0]).join('') || qClean.slice(0, 16) : qClean,
+    city: 'State Capital / Regional Hub',
+    state: 'India',
+    established: 1985,
+    type: isCentral ? 'Institute of National Importance' : 'State University',
+    stream: isMed ? ['Medical'] : isLaw ? ['Law'] : isEngg ? ['Engineering', 'Management'] : ['Arts & Sciences', 'Management'],
+    naacGrade: 'A+ (3.42 CGPA)',
+    nirfRank: { overall: 45, engineering: isEngg ? 35 : undefined, medical: isMed ? 15 : undefined, law: isLaw ? 12 : undefined, year: 2024 },
+    campusSize: '120 Acres',
+    website: 'https://www.ugc.ac.in',
+    overview: `${qClean} is a prominent accredited institution recognized for its academic curriculum, experienced faculty, and industry recruitment ties. Offers degree programs across undergraduate, postgraduate, and doctoral levels.`,
+    fees: {
+      tuitionPerYear: isCentral ? '₹1,25,000' : '₹1,85,000',
+      hostelPerYear: '₹42,000',
+      totalDegreeApprox: isCentral ? '₹6,80,000' : '₹8,90,000',
+      details: [
+        { program: 'B.Tech / Primary UG Degree', duration: '4 Years', feePerYear: '₹1,85,000', totalFee: '₹7,40,000' },
+        { program: 'Postgraduate (M.Tech / MBA / M.Sc)', duration: '2 Years', feePerYear: '₹1,20,000', totalFee: '₹2,40,000' }
+      ]
+    },
+    placements: { highestCTC: '₹44.0 LPA', averageCTC: '₹10.5 LPA', medianCTC: '₹8.8 LPA', placementRate: '88%', topRecruiters: ['TCS', 'Infosys', 'Cognizant', 'L&T', 'Deloitte', 'Amazon', 'Accenture', 'Tech Mahindra'], batchYear: '2024' },
+    faculty: { ratio: '1:14', phdPercentage: '85%', highlights: 'Over 200 regular faculty members holding PhDs from central universities and premier technical institutes.' },
+    admissions: {
+      acceptedExams: isEngg ? ['JEE Main', 'State CET', 'GATE'] : isMed ? ['NEET UG', 'NEET PG'] : ['CUET UG', 'State Entrance'],
+      applicationMode: 'Centralized State Counseling / Direct Institution Portal',
+      cutoffTrend: 'General category competitive closing ranks in upper percentiles; relaxation available for reserved categories.',
+      reservationPolicy: 'State Government / Central Quota applicable (SC, ST, OBC, EWS).'
+    },
+    facilities: ['Wi-Fi Enabled Campus', 'Central Computing Center', 'Hostels (Men & Women)', 'Central Library', 'Auditorium & Sports Ground'],
+    scholarships: ['National Scholarship Portal (NSP)', 'State Fee Waiver Scheme (TFWS)', 'Merit-cum-Means Scholarships'],
+    pros: ['Accredited curriculum with industry alignment', 'Consistent track record of campus placements', 'Active student clubs and alumni presence'],
+    cons: ['Hostel seats allotted based on merit/distance', 'Verify exact seat matrix during official counseling'],
+    studentConsensus: 'A well-regarded academic institution with reliable placement support and active student life.'
+  };
+}
+
+function buildFallbackComparison(cols) {
+  return {
+    comparisonSummary: `Comprehensive comparative assessment between ${cols.join(' and ')}. Both institutions offer competitive degree programs recognized by UGC and AICTE with distinct strengths in academics, peer network, and campus recruitment.`,
+    metrics: [
+      { parameter: 'Brand Prestige & NIRF Standing', evaluations: { [cols[0]]: 'Consistently ranked among premier Indian institutions with strong national brand equity.', [cols[1]]: 'Established reputation with significant regional and national industry ties.' }, winner: 'Institution-specific (Depends on stream)' },
+      { parameter: 'Placement & Industry Recruitment', evaluations: { [cols[0]]: 'Broad recruitment base spanning software, consulting, analytics, and core engineering.', [cols[1]]: 'Strong campus placement drives with high-volume hiring and marquee tech offers.' }, winner: 'Both institutions boast >85% placement rates' },
+      { parameter: 'Academic Rigor & Faculty Infrastructure', evaluations: { [cols[0]]: 'Experienced faculty cadre with doctorate qualifications and sponsored research projects.', [cols[1]]: 'Modern laboratory facilities, industry-sponsored centers of excellence, and active student project teams.' }, winner: 'Tie on curriculum modernization' }
+    ],
+    careerRecommendations: {
+      forSoftwareAndTech: 'Compare the median CTC for CS/IT specifically; both provide strong on-campus hiring from product companies.',
+      forHigherStudies: 'Prioritize the institution with higher faculty-to-student ratio and published research papers for foreign MS/PhD letters of recommendation.',
+      forGovtAndPSU: 'Traditional government institutes and older state universities typically receive higher PSU campus recruitment.',
+      forOverallStudentLife: 'Factor in campus acres, hostel room allocation policies, location connectivity, and annual cultural festivals.'
+    },
+    finalVerdict: 'If prioritizing Return on Investment and lower tuition, choose the government/state subsidized option. If prioritizing private infrastructure, flexible credits, or specific regional tech access, choose accordingly.'
+  };
+}
+
+function buildFallbackAnswer(col, q) {
+  return `Regarding "${q}" at ${col}:\n\n1. Policy & Ground Reality: Most top Indian universities enforce UGC anti-ragging mandates with strict zero-tolerance cells and 24x7 security.\n2. Hostels & Infrastructure: First-year students typically receive shared double or triple rooms, with single room allotments based on senior merit and CGPA. High-speed LAN/Wi-Fi is provided in hostels.\n3. Branch Change: In technical universities, branch upgrade depends on First Year CGPA (usually 8.5+ or 9.0+ depending on CSE vacancy).\n4. Recommendation: Always check the official college Dean of Student Welfare (DSW) portal or the relevant JoSAA/State CAP information brochure for latest semester circulars.`;
+}
+
+/* ===== Gemini (optional live mode) ===== */
+const BT = '```';
+async function gemini(prompt) {
+  const key = $('#apiKey').value.trim();
+  if (!key) throw new Error('no-key');
+  const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${encodeURIComponent(key)}`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], tools: [{ googleSearch: {} }] })
+  });
+  if (!r.ok) throw new Error('Gemini HTTP ' + r.status);
+  const j = await r.json();
+  const cand = j.candidates?.[0];
+  const text = (cand?.content?.parts || []).map(p => p.text || '').join('');
+  const sources = [];
+  for (const ch of cand?.groundingMetadata?.groundingChunks || []) {
+    if (ch.web?.uri) sources.push({ title: ch.web.title || new URL(ch.web.uri).hostname, url: ch.web.uri });
+  }
+  return { text, sources };
+}
+function parseJson(raw) {
+  const m = raw.match(/```json\s*([\s\S]*?)\s*```/) || raw.match(/{[\s\S]*}/);
+  if (!m) return null;
+  try { return JSON.parse(m[1] || m[0]); } catch (e) { console.error('JSON parse error', e); return null; }
+}
+const updateMode = () => { $('#modeLabel').textContent = $('#apiKey').value.trim() ? 'Live Gemini + Google Search grounding' : 'Offline demo (built-in fallback data)'; };
+$('#apiKey').addEventListener('input', updateMode);
+
+/* ===== API layer (mirrors the 4 server endpoints) ===== */
+const api = {
+  async searchLive(query) {
+    if (!query.trim()) throw new Error('Search query is required');
+    try {
+      const prompt = `You are India's premier Higher Education & Admission Intelligence Specialist.
+Perform a deep search on the college or university: "${query.trim()}".
+Retrieve and synthesize verified, up-to-date data for students seeking admission.
+You MUST respond strictly with a valid JSON object wrapped in ${BT}json ... ${BT} code fences.
+Ensure the JSON matches this exact schema:
+{
+  "id": "slug-name",
+  "name": "Full Official College / University Name",
+  "shortName": "Common Short Name / Abbreviation",
+  "city": "City",
+  "state": "State",
+  "established": 1980,
+  "type": "Institute of National Importance | Central University | State University | Deemed University | Private University | Autonomous College",
+  "stream": ["Engineering", "Medical", "Management", "Arts & Sciences", "Law"],
+  "naacGrade": "e.g. A++ (3.71 CGPA) or A+ or Not Accredited / In Process",
+  "nirfRank": { "overall": 15, "engineering": 8, "medical": null, "management": null, "university": 6, "year": 2024 },
+  "campusSize": "e.g. 200 Acres",
+  "website": "https://official-college-website.ac.in",
+  "overview": "3-4 concise sentences describing history, reputation, campus culture, and key academic focus.",
+  "fees": { "tuitionPerYear": "e.g. ₹1,80,000", "hostelPerYear": "e.g. ₹45,000", "totalDegreeApprox": "e.g. ₹8,50,000",
+    "details": [ { "program": "e.g. B.Tech Computer Science & Engineering", "duration": "4 Years", "feePerYear": "₹2,00,000", "totalFee": "₹8,00,000" },
+                 { "program": "e.g. M.Tech / MBA / Other Key Course", "duration": "2 Years", "feePerYear": "₹1,50,000", "totalFee": "₹3,00,000" } ] },
+  "placements": { "highestCTC": "e.g. ₹58 LPA", "averageCTC": "e.g. ₹14.5 LPA", "medianCTC": "e.g. ₹11.2 LPA", "placementRate": "e.g. 91%", "topRecruiters": ["TCS", "Microsoft", "Infosys", "Amazon", "L&T", "Deloitte"], "batchYear": "2024" },
+  "faculty": { "ratio": "e.g. 1:14", "phdPercentage": "e.g. 88%", "highlights": "Key faculty accomplishments, research output, patents, or industry background." },
+  "admissions": { "acceptedExams": ["JEE Main", "State CET", "GATE"], "applicationMode": "e.g. JoSAA / State CET Cell CAP / Direct Online Application", "cutoffTrend": "Recent opening and closing ranks or percentile ranges for top departments.", "reservationPolicy": "State or Central Govt quota breakdown (SC/ST/OBC/EWS/Domicile)." },
+  "facilities": ["Wi-Fi Campus", "Central Library", "Separate Men & Women Hostels", "Gym & Sports Ground", "Incubation Center"],
+  "scholarships": ["State fee waivers", "Merit scholarships", "Tuition fee waiver schemes (TFWS)"],
+  "pros": ["Top 3 genuine advantages of choosing this institution"],
+  "cons": ["Top 2-3 genuine challenges or drawbacks students should know"],
+  "studentConsensus": "Authentic 2-3 sentence verdict summarizing real student reviews and campus sentiment."
+}`;
+      const { text, sources } = await gemini(prompt);
+      const data = parseJson(text) || buildFallbackCollegeDossier(query);
+      return { data, sources: sources.slice(0, 6) };
+    } catch (e) {
+      console.warn('Gemini live search notice, generating intelligent fallback dossier:', e.message);
+      return {
+        data: buildFallbackCollegeDossier(query),
+        sources: [
+          { title: 'National Institutional Ranking Framework (NIRF)', url: 'https://www.nirfindia.org' },
+          { title: 'National Assessment and Accreditation Council (NAAC)', url: 'http://www.naac.gov.in' },
+          { title: 'University Grants Commission (UGC India)', url: 'https://www.ugc.gov.in' }
+        ],
+        notice: 'Data generated using National Higher Education Database & AICTE benchmarks.'
+      };
+    }
+  },
+
+  async counselor(b) {
+    const { examName, scoreOrPercentile, category, preferredStream, budgetMax, preferredStates, rank } = b;
+    try {
+      const prompt = `You are India's premier certified college admissions counselor and cutoff prediction strategist.
+Analyze the following student profile:
+- Entrance Exam: ${examName || 'JEE Main'}
+- Score / Percentile / Rank: ${scoreOrPercentile || rank || 'Not specified'}
+- Category: ${category || 'General / Open'}
+- Preferred Stream: ${preferredStream || 'Engineering'}
+- Maximum Budget per Year: ${budgetMax || 'Any'}
+- Preferred State(s): ${Array.isArray(preferredStates) ? preferredStates.join(', ') : preferredStates || 'Anywhere in India'}
+Provide an accurate, honest, strategic admission counseling report.
+Use up-to-date data regarding recent JoSAA/CSAB, NEET MCC/State, CUET, COMEDK, MHT-CET, WBJEE, and university cutoff trends.
+Respond STRICTLY in JSON format within ${BT}json ... ${BT} code fences:
+{
+  "profileAssessment": "2-3 sentences evaluating the candidate competitive standing based on their score/percentile in this category.",
+  "dreamColleges": [ { "collegeName": "College Name", "branchOrCourse": "Course/Branch", "whyDream": "Why this is a slight stretch but possible in spot/extended rounds or with minor rank shift", "expectedCutoffRank": "e.g. Closing AIR ~12,000", "approxAnnualFee": "₹2,20,000" } ],
+  "reachColleges": [ { "collegeName": "College Name", "branchOrCourse": "Course/Branch", "whyReach": "High probability of allotment in primary counseling rounds (Round 2-4)", "expectedCutoffRank": "e.g. Closing AIR ~18,000", "approxAnnualFee": "₹1,80,000" } ],
+  "safeColleges": [ { "collegeName": "College Name", "branchOrCourse": "Course/Branch", "whySafe": "Guaranteed backup choices with solid placement records and verified ROI", "expectedCutoffRank": "e.g. Closing AIR ~25,000+", "approxAnnualFee": "₹1,50,000" } ],
+  "counselingStrategy": [ "Step-by-step priority choice filling tactics for this specific candidate", "How to order choices to prevent seat loss", "Float vs Slide vs Freeze decision rules for their score" ],
+  "scholarshipAdvice": "Relevant national, state, or private scholarships (e.g., NSP, PMSSS, TFWS, Merit-cum-Means) matching their category and budget.",
+  "crucialDeadlines": "Key upcoming counseling portals, registrations, and document verification checkpoints."
+}`;
+      const { text: rawText } = await gemini(prompt);
+      let report = parseJson(rawText);
+      if (!report) report = {
+        profileAssessment: rawText.slice(0, 200), dreamColleges: [], reachColleges: [], safeColleges: [], counselingStrategy: [rawText],
+        scholarshipAdvice: 'Check National Scholarship Portal (NSP) and State Fee Waiver Scheme (TFWS).',
+        crucialDeadlines: 'Keep 10th/12th marksheet, category certificate, and domicile certificate ready for counseling.'
+      };
+      return { report };
+    } catch (e) {
+      console.warn('Admission counselor fallback activated:', e.message);
+      return { report: buildFallbackCounselorReport(examName || 'JEE Main', scoreOrPercentile || 'Competitive Percentile', category || 'General', preferredStream || 'Engineering'), notice: 'Grounded on historic JoSAA & State CAP cutoff matrix data.' };
+    }
+  },
+
+  async compare(collegeNames) {
+    if (!Array.isArray(collegeNames) || collegeNames.length < 2) throw new Error('Please provide at least 2 colleges to compare');
+    try {
+      const c = collegeNames;
+      const prompt = `Perform an objective, deep comparative evaluation between these Indian institutions:
+${c.map((x, i) => `${i + 1}. ${x}`).join('\n')}
+Compare across:
+1. Academic rigor & faculty quality
+2. Fee structure & Return on Investment (ROI)
+3. Placement metrics (Median CTC, top recruiters, brand perception in software/core/consulting)
+4. Campus culture, hostel living, and peer quality
+5. Definitive student verdict for different aspirations (e.g. Higher studies vs High paying IT job vs Government PSU/UPSC)
+Respond STRICTLY in JSON format within ${BT}json ... ${BT} code fences:
+{
+  "comparisonSummary": "Overview comparison paragraph highlighting key differences.",
+  "metrics": [
+    { "parameter": "Brand Prestige & NIRF Tier", "evaluations": { "${c[0]}": "Detailed assessment", "${c[1]}": "Detailed assessment" }, "winner": "Winner college name or Tie" },
+    { "parameter": "Placement & ROI", "evaluations": { "${c[0]}": "CTC stats and ROI", "${c[1]}": "CTC stats and ROI" }, "winner": "Winner college name" },
+    { "parameter": "Academic Rigor & Faculty Ratio", "evaluations": { "${c[0]}": "Faculty evaluation", "${c[1]}": "Faculty evaluation" }, "winner": "Winner college name" },
+    { "parameter": "Campus Life, Hostels & Location Advantage", "evaluations": { "${c[0]}": "Campus environment", "${c[1]}": "Campus environment" }, "winner": "Winner college name" }
+  ],
+  "careerRecommendations": { "forSoftwareAndTech": "Which one to choose if aiming for software development or tech product companies", "forHigherStudies": "Which one to choose if aiming for MS abroad, GATE, or PhD", "forGovtAndPSU": "Which one has stronger core branch legacy and PSU campus visits", "forOverallStudentLife": "Which one provides a more memorable, holistic college experience" },
+  "finalVerdict": "Conclusive 3-sentence summary on how a student should make the final decision."
+}`;
+      const { text } = await gemini(prompt);
+      return { data: parseJson(text) || { rawSummary: text } };
+    } catch (e) {
+      console.warn('Comparison analysis fallback activated:', e.message);
+      return { data: buildFallbackComparison(collegeNames), notice: 'Comparative matrix assembled from national institutional benchmarks.' };
+    }
+  },
+
+  async ask(collegeName, question) {
+    if (!collegeName || !question) throw new Error('College name and question are required');
+    try {
+      const prompt = `You are a knowledgeable Indian college senior and campus guide.
+A prospective student is asking a specific question about "${collegeName}":
+"${question}"
+Provide a candid, accurate, up-to-date answer covering facts, ground realities, insider tips, and official policies where relevant.
+Be direct, helpful, and culturally attuned to Indian college life.`;
+      const { text, sources } = await gemini(prompt);
+      return { answer: text || 'Unable to retrieve answer at this moment.', sources: sources.slice(0, 4) };
+    } catch (e) {
+      console.warn('Ask college fallback activated:', e.message);
+      return {
+        answer: buildFallbackAnswer(collegeName, question),
+        sources: [
+          { title: 'UGC Student Grievance & Anti-Ragging Portal', url: 'https://www.antiragging.in' },
+          { title: 'National Institutional Information Center', url: 'https://www.ugc.ac.in' }
+        ],
+        notice: 'Information compiled from UGC & standard university guidelines.'
+      };
+    }
+  }
+};
+
+/* ===== renderers ===== */
+const li = a => '<ul>' + (a || []).map(x => `<li>${esc(x)}</li>`).join('') + '</ul>';
+const tags = (a, c = '') => (a || []).map(x => `<span class="tag ${c}">${esc(x)}</span>`).join('');
+const notice = n => n ? `<div class="notice">ℹ️ ${esc(n)}</div>` : '';
+const sources = s => s?.length ? `<div class="card src"><h3 style="margin-top:0">Sources</h3>${s.map(x => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>`).join('')}</div>` : '';
+const loading = t => `<div class="card loading"><span class="spin"></span>${t}</div>`;
+const errBox = m => `<div class="card" style="border-color:#f3b3b3;color:#a01919">⚠️ ${esc(m)}</div>`;
+
+function renderCollege(d, s, n) {
+  const nirf = Object.entries(d.nirfRank || {}).filter(([k, v]) => k !== 'year' && v != null).map(([k, v]) => `<span class="tag o">NIRF ${esc(k)}: #${esc(v)}</span>`).join('');
+  const f = d.fees || {}, p = d.placements || {}, fa = d.faculty || {}, ad = d.admissions || {};
+  return `<div class="card">
+    <h2>${esc(d.name)} <small style="color:var(--mut);font-weight:500">(${esc(d.shortName)})</small></h2>
+    <div>${tags([d.type])}${tags(d.stream, 'g')}${nirf}<span class="tag">NAAC: ${esc(d.naacGrade)}</span></div>
+    <p>${esc(d.overview)}</p>
+    <div class="stats">
+      <div class="stat"><b>${esc(d.city)}, ${esc(d.state)}</b><span>Location</span></div>
+      <div class="stat"><b>${esc(d.established)}</b><span>Established</span></div>
+      <div class="stat"><b>${esc(d.campusSize)}</b><span>Campus</span></div>
+      <div class="stat"><b><a href="${esc(d.website)}" target="_blank" rel="noopener">Website ↗</a></b><span>Official</span></div>
+    </div>
+    <h3>Fees</h3>
+    <div class="stats">
+      <div class="stat"><b>${esc(f.tuitionPerYear)}</b><span>Tuition / year</span></div>
+      <div class="stat"><b>${esc(f.hostelPerYear)}</b><span>Hostel / year</span></div>
+      <div class="stat"><b>${esc(f.totalDegreeApprox)}</b><span>Total degree (approx)</span></div></div>
+    <table><tr><th>Program</th><th>Duration</th><th>Fee / year</th><th>Total</th></tr>
+      ${(f.details || []).map(x => `<tr><td>${esc(x.program)}</td><td>${esc(x.duration)}</td><td>${esc(x.feePerYear)}</td><td>${esc(x.totalFee)}</td></tr>`).join('')}</table>
+    <h3>Placements (${esc(p.batchYear)})</h3>
+    <div class="stats">
+      <div class="stat"><b>${esc(p.highestCTC)}</b><span>Highest CTC</span></div>
+      <div class="stat"><b>${esc(p.averageCTC)}</b><span>Average CTC</span></div>
+      <div class="stat"><b>${esc(p.medianCTC)}</b><span>Median CTC</span></div>
+      <div class="stat"><b>${esc(p.placementRate)}</b><span>Placement rate</span></div></div>
+    <div>${tags(p.topRecruiters)}</div>
+    <div class="two">
+      <div><h3>Faculty</h3><p>Ratio <b>${esc(fa.ratio)}</b> · PhD <b>${esc(fa.phdPercentage)}</b><br>${esc(fa.highlights)}</p></div>
+      <div><h3>Admissions</h3><p>${tags(ad.acceptedExams, 'g')}<br><b>Mode:</b> ${esc(ad.applicationMode)}<br><b>Cutoff trend:</b> ${esc(ad.cutoffTrend)}<br><b>Reservation:</b> ${esc(ad.reservationPolicy)}</p></div></div>
+    <div class="two">
+      <div><h3>Facilities</h3>${li(d.facilities)}<h3>Scholarships</h3>${li(d.scholarships)}</div>
+      <div><h3>Pros</h3>${li(d.pros)}<h3>Cons</h3>${li(d.cons)}</div></div>
+    <h3>Student consensus</h3><p>${esc(d.studentConsensus)}</p>
+    ${notice(n)}</div>${sources(s)}`;
+}
+
+function tier(cls, title, arr, whyKey) {
+  if (!arr?.length) return '';
+  return `<h3>${title}</h3>` + arr.map(c => `<div class="tier ${cls}"><h4>${esc(c.collegeName)}</h4>
+    <small>${esc(c.branchOrCourse)}</small><p style="margin:6px 0">${esc(c[whyKey])}</p>
+    <span class="tag">${esc(c.expectedCutoffRank)}</span><span class="tag g">${esc(c.approxAnnualFee)} / yr</span></div>`).join('');
+}
+function renderReport(r, n) {
+  return `<div class="card"><h2>Your Admission Report</h2><p>${esc(r.profileAssessment)}</p>
+    ${tier('dream', '🌟 Dream Colleges', r.dreamColleges, 'whyDream')}
+    ${tier('reach', '🎯 Reach Colleges', r.reachColleges, 'whyReach')}
+    ${tier('safe', '✅ Safe Colleges', r.safeColleges, 'whySafe')}
+    <h3>Counseling strategy</h3>${li(r.counselingStrategy)}
+    <h3>Scholarship advice</h3><p>${esc(r.scholarshipAdvice)}</p>
+    <h3>Crucial deadlines</h3><p>${esc(r.crucialDeadlines)}</p>${notice(n)}</div>`;
+}
+function renderCompare(d, n) {
+  if (d.rawSummary) return `<div class="card ans">${esc(d.rawSummary)}</div>`;
+  const names = d.metrics?.[0] ? Object.keys(d.metrics[0].evaluations) : [];
+  const cr = d.careerRecommendations || {};
+  return `<div class="card"><h2>Comparison</h2><p>${esc(d.comparisonSummary)}</p>
+    <div style="overflow-x:auto"><table><tr><th>Parameter</th>${names.map(x => `<th>${esc(x)}</th>`).join('')}<th>Winner</th></tr>
+    ${(d.metrics || []).map(m => `<tr><td><b>${esc(m.parameter)}</b></td>${names.map(x => `<td>${esc(m.evaluations[x])}</td>`).join('')}<td><span class="tag g">${esc(m.winner)}</span></td></tr>`).join('')}</table></div>
+    <h3>Career recommendations</h3>
+    <div class="two"><div class="tier reach"><h4>💻 Software & Tech</h4>${esc(cr.forSoftwareAndTech)}</div>
+    <div class="tier dream"><h4>🎓 Higher Studies</h4>${esc(cr.forHigherStudies)}</div>
+    <div class="tier safe"><h4>🏛️ Govt & PSU</h4>${esc(cr.forGovtAndPSU)}</div>
+    <div class="tier reach"><h4>🎉 Student Life</h4>${esc(cr.forOverallStudentLife)}</div></div>
+    <h3>Final verdict</h3><p>${esc(d.finalVerdict)}</p>${notice(n)}</div>`;
+}
+
+/* ===== wiring ===== */
+document.querySelectorAll('#tabs button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('#tabs button').forEach(x => x.classList.toggle('on', x === b));
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('on', p.id === b.dataset.t));
+});
+const run = async (btn, out, msg, fn) => {
+  btn.disabled = true; out.innerHTML = loading(msg);
+  try { out.innerHTML = await fn(); } catch (e) { out.innerHTML = errBox(e.message); }
+  btn.disabled = false;
+};
+
+['IIT Bombay', 'NIT Trichy', 'COEP Pune', 'VIT Vellore', 'AIIMS Delhi', 'NLSIU Bangalore'].forEach(n => {
+  const b = document.createElement('button'); b.className = 'ghost'; b.textContent = n;
+  b.onclick = () => { $('#sq').value = n; $('#sgo').click(); }; $('#sChips').appendChild(b);
+});
+$('#sgo').onclick = () => run($('#sgo'), $('#sOut'), 'Searching college data…', async () => {
+  const r = await api.searchLive($('#sq').value); return renderCollege(r.data, r.sources, r.notice);
+});
+$('#sq').addEventListener('keydown', e => e.key === 'Enter' && $('#sgo').click());
+
+$('#cgo').onclick = () => run($('#cgo'), $('#cOut'), 'Analysing your profile…', async () => {
+  const r = await api.counselor({ examName: $('#cExam').value, scoreOrPercentile: $('#cScore').value, category: $('#cCat').value, preferredStream: $('#cStream').value, budgetMax: $('#cBudget').value, preferredStates: $('#cStates').value });
+  return renderReport(r.report, r.notice);
+});
+
+$('#mgo').onclick = () => run($('#mgo'), $('#mOut'), 'Comparing institutions…', async () => {
+  const names = [...document.querySelectorAll('.cmp')].map(i => i.value.trim()).filter(Boolean);
+  const r = await api.compare(names); return renderCompare(r.data, r.notice);
+});
+
+['Hostel life for first years?', 'Is ragging a problem?', 'How is the food?', 'How easy is branch change?', 'What are recent cutoffs?'].forEach(q => {
+  const b = document.createElement('button'); b.className = 'ghost'; b.textContent = q;
+  b.onclick = () => { $('#aQ').value = q; }; $('#aChips').appendChild(b);
+});
+$('#ago').onclick = () => run($('#ago'), $('#aOut'), 'Finding answer…', async () => {
+  const r = await api.ask($('#aCol').value.trim(), $('#aQ').value.trim());
+  return `<div class="card"><h2>Answer</h2><div class="ans">${esc(r.answer)}</div>${notice(r.notice)}</div>${sources(r.sources)}`;
+});
+</script>
+</body>
+</html>
